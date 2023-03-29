@@ -54,12 +54,18 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">{{ product.name }}</h5>
-                            <p class="card-text"><u>Price:</u> {{ product.price }}<br>
+                            <p class="card-text">
+                                <u>Price:</u> {{ product.price }}
+                            </p>
+                            <p class="card-text">
                                 <u>Short description:</u> {{ product.desc }}
+                            </p>
+                            <p class="card-text">
+                                <u>Category:</u> {{ product.category }}
                             </p>
                         </div>
                         <div class="card-body">
-                            <a href="#" class="btn btn-primary me-2">Details</a>
+                            <a href="#" class="btn btn-primary me-2">Others in this category</a>
                             <a href="#" class="btn btn-success">Buy</a>
                         </div>
                     </div>
