@@ -31,7 +31,7 @@
                         <a class="nav-link active" aria-current="page" href="#">Main page</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">About us</a>
+                        <a class="nav-link" href="#">Cart</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#contacts">Contacts</a>
@@ -40,21 +40,23 @@
             </div>
 
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <a href="#" class="btn btn-outline-light me-2" type="button">Log in</a>
+                <a href="/admin" class="btn btn-outline-light me-2" type="button">Log in</a>
             </div>
         </div>
     </nav>
 
     <div class="container my-5">
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-5">
-        {% for i in '012345'|make_list %}
-{#            {{ forloop.counter }}#}
+        {% for product in products %}
+{#        {% for i in '012345'|make_list %}#}
             <div class="col">
-                <a href="/conference_site/details?id=<?= $val['id']?>" style="text-decoration: none; color: #1C0878">
+                <a href="#" style="text-decoration: none; color: #1C0878">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Item 1</h5>
-                            <p class="card-text">Price: 20$</p>
+                            <h5 class="card-title">{{ product.name }}</h5>
+                            <p class="card-text"><u>Price:</u> {{ product.price }}<br>
+                                <u>Short description:</u> {{ product.desc }}
+                            </p>
                         </div>
                         <div class="card-body">
                             <a href="#" class="btn btn-primary me-2">Details</a>
@@ -67,9 +69,9 @@
         </div>
     </div>
 
-    <br><br><br>
+{#    <br><br><br><br><br><br>#}
     <a name="contacts"></a>
-    <footer class="text-center text-lg-start">
+    <footer class="fixed-bottom text-center text-lg-start">
         <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
             <div class="container p-4">
                 <div class="row">
