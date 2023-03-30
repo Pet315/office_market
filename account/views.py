@@ -13,5 +13,6 @@ def log_in(request):
     #     account.name = request.POST.get("email")
     #     account.age = request.POST.get("password")
     #     account.save()
-
     return render(request, 'log_in.html')
+
+
