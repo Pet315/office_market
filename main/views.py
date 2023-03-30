@@ -1,17 +1,19 @@
 from django.http import HttpResponse, HttpResponseNotFound
 from django.shortcuts import render
-from main.models import Product
+from main.models import Product, Category
 
 
-def main(request):
-    products = Product.objects.filter()
-    return render(request, 'main_page.html', context={'products': products})
+def category(request):
+    categories = Category.objects.all()
+    return render(request, 'categories.html', context={'categories': categories})
 
 
-# def post_number(request, number: int):
-#     return HttpResponse(f'<h1>Post #{number}</h1>')
+def product(request, id: int):
+    if id > len(Category.objects.all()):
+        return HttpResponseNotFound('Wrong number')
+    products = Product.objects.filter(category_id=id)
+    return render(request, 'products.html', context={'products': products})
 
-# def post_number_month(request, number: int, month: int):
-#     if 1 <= month <= 12:
-#         return HttpResponse(f'<h1>Post #{number} from month #{month}</h1>')
-#     return HttpResponseNotFound('Wrong month')
+
+def cart(request):
+    return render(request, 'cart.html')
