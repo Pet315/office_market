@@ -52,27 +52,24 @@
         <h4 class="title">Products</h4>
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-5">
         {% for product in products %}
-{#        {% for i in '012345'|make_list %}#}
             <div class="col">
-                <a href="#" style="text-decoration: none; color: #1C0878">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ product.name }}</h5>
-                            <p class="card-text">
-                                <u>Price:</u> {{ product.price }}
-                            </p>
-                            <p class="card-text">
-                                <u>Short description:</u> {{ product.desc }}
-                            </p>
-                            <p class="card-text">
-                                <u>Category:</u> {{ product.category }}
-                            </p>
-                        </div>
-                        <div class="card-body">
-                            <a href="#" class="btn btn-success">Buy</a>
-                        </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text">
+                            <u>Price:</u> {{ product.price }}
+                        </p>
+                        <p class="card-text">
+                            <u>Short description:</u> {{ product.desc }}
+                        </p>
+                        <p class="card-text">
+                            <u>Category:</u> {{ product.category }}
+                        </p>
                     </div>
-                </a>
+                    <div class="card-body">
+                        <a href="/cart/{{ product.id }}" class="btn btn-danger">Add to cart</a>
+                    </div>
+                </div>
             </div>
         {% endfor %}
         </div>

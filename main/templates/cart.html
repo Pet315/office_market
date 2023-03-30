@@ -50,6 +50,28 @@
 
     <div class="container my-5">
         <h4 class="title">Cart</h4>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-5">
+        {% for cart_el in cart %}
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ cart_el.product }}</h5>
+                        <p class="card-text">
+                            <u>Quantity:</u> {{ cart_el.quantity }}
+                        </p>
+                    </div>
+                    <div class="card-body">
+                        <a href="/products/{{ cart_el.product_id }}" class="btn btn-primary me-2">Details</a>
+                        <a href="/cart/{{ cart_el.product_id }}" class="btn btn-danger me-2">+</a>
+                        <a href="/cart/delete_product/{{ cart_el.product_id }}" class="btn btn-danger me-2">-</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+        <div class="p-5">
+            <button class="btn btn-success">Send the order</button>
+        </div>
     </div>
 
     <a name="contacts"></a>

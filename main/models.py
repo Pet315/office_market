@@ -25,3 +25,11 @@ class Product(models.Model):
 
     def __str__(self):
         return f'{self.name}'
+
+
+class Cart(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.IntegerField()
+
+    def __str__(self):
+        return f'{self.product}'
