@@ -1,6 +1,6 @@
 from django.http import HttpResponseNotFound
 from django.shortcuts import render
-from main.models import Product, Category, Cart
+from main.models import Product, Category, Cart, Order
 
 
 def category(request):
@@ -53,3 +53,15 @@ def add_to_cart(request, id: int):
 def delete_from_cart(request, id: int):
     edit_cart_product(id, '-', request.user.id)
     return render(request, 'cart.html', context={'cart': Cart.objects.all()})
+
+
+def send_order(request):
+    orders = Cart.objects.filter(user_id=request.user.id)
+    print(orders)
+    for ord in orders:
+        order = Order()
+        order.product_id, order.quantity, order.user_id, order.email = ord.product_id, ord.quantity, \
+                                                                       ord.user_id, request.POST.get('email')
+        order.save()
+        ord.delete()
+    return render(request, 'order.html')

@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block title %} Order {% endblock %}
+
+{% block link_in_nav %}
+    <p style="color: white">{{ user_profile.username }}</p>
+    <a href="/" class="btn btn-outline-light me-2" type="button">Log out</a>
+{% endblock %}
+
+{% block content %}
+    <h4>Congratulations! Your order has been sent. Please, we will connect with you after processing</h4>
+    <div style="height: 290px"></div>
+{% endblock %}
