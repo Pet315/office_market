@@ -1,4 +1,4 @@
-from django.http import HttpResponse, HttpResponseNotFound
+from django.http import HttpResponseNotFound
 from django.shortcuts import render
 from main.models import Product, Category, Cart
 
@@ -6,6 +6,7 @@ from main.models import Product, Category, Cart
 def category(request):
     categories = Category.objects.all()
     user_profile = request.user
+    # print(request.user.id)
     return render(request, 'categories.html', context={'categories': categories, 'user_profile': user_profile})
 
 
@@ -22,11 +23,11 @@ def cart(request):
     return render(request, 'cart.html', context={'user_profile': user_profile})
 
 
-def edit_cart_product(id, way):
-    if id > len(Product.objects.filter()):
+def edit_cart_product(product_id, way, user_id):
+    if product_id > len(Product.objects.filter()):
         return HttpResponseNotFound('Wrong number')
 
-    product = Cart.objects.filter(product_id=id)
+    product = Cart.objects.filter(product_id=product_id, user_id=user_id)
 
     if len(product) == 0:
         quantity = 0
@@ -35,19 +36,20 @@ def edit_cart_product(id, way):
     product.delete()
 
     cart = Cart()
-    cart.product_id = id
+    cart.product_id = product_id
     if str(way) == '+':
         cart.quantity = quantity + 1
     else:
         cart.quantity = quantity - 1
+    cart.user_id = user_id
     cart.save()
 
 
 def add_to_cart(request, id: int):
-    edit_cart_product(id, '+')
+    edit_cart_product(id, '+', request.user.id)
     return render(request, 'cart.html', context={'cart': Cart.objects.all()})
 
 
 def delete_from_cart(request, id: int):
-    edit_cart_product(id, '-')
+    edit_cart_product(id, '-', request.user.id)
     return render(request, 'cart.html', context={'cart': Cart.objects.all()})

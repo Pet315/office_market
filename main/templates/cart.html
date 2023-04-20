@@ -8,44 +8,31 @@
 {% endblock %}
 
 {% block content %}
-  <div class="container my-5">
+    <div class="container my-5">
         <h4 class="title">Cart</h4>
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-5">
             {% for cart_el in cart %}
-            <div class="col">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ cart_el.product }}</h5>
-                        <p class="card-text">
-                            <u>Quantity:</u> {{ cart_el.quantity }}
-                        </p>
+                {% if cart_el.quantity > 0 and cart_el.user_id == user.id %}
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ cart_el.product }}</h5>
+                                <p class="card-text">
+                                    <u>Quantity:</u> {{ cart_el.quantity }}
+                                </p>
+                            </div>
+                            <div class="card-body">
+                                <a href="/products/{{ cart_el.product_id }}" class="btn btn-primary me-2">Details</a>
+                                <a href="/cart/{{ cart_el.product_id }}" class="btn btn-danger me-2">+</a>
+                                <a href="/cart/delete_product/{{ cart_el.product_id }}" class="btn btn-danger me-2">-</a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <a href="/products/{{ cart_el.product_id }}" class="btn btn-primary me-2">Details</a>
-                        <a href="/cart/{{ cart_el.product_id }}" class="btn btn-danger me-2">+</a>
-                        <a href="/cart/delete_product/{{ cart_el.product_id }}" class="btn btn-danger me-2">-</a>
-                    </div>
-                </div>
-            </div>
+                {% endif %}
             {% endfor %}
         </div>
-{#        <br>#}
-{#        <div class="row-cols-1 row-cols-md-2 row-cols-lg-3">#}
-{#            <div class="card">#}
-{#                <form class="p-2" action="/finish" method="post">#}
-{#                    {% csrf_token %}#}
-{#                    <div class="card-body">#}
-{#                        <div class="form-group">#}
-{#                            <label>Email</label>#}
-{#                            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">#}
-{#                        </div>#}
-{#                    </div>#}
-{#                    <div class="card-body">#}
-{#                        <button type="submit" class="btn btn-success">Send the order</button>#}
-{#                    </div>#}
-{#                </form>#}
-{#            </div>#}
-{#        </div>#}
+        <a href="/cart/send_order" class="btn btn-success mt-4">Send the order</a>
     </div>
+    <div style="height: 270px"></div>
 
 {% endblock %}
