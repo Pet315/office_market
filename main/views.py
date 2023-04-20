@@ -5,18 +5,21 @@ from main.models import Product, Category, Cart
 
 def category(request):
     categories = Category.objects.all()
-    return render(request, 'categories.html', context={'categories': categories})
+    user_profile = request.user
+    return render(request, 'categories.html', context={'categories': categories, 'user_profile': user_profile})
 
 
 def product(request, id: int):
     if id > len(Category.objects.all()):
         return HttpResponseNotFound('Wrong number')
+    user_profile = request.user
     products = Product.objects.filter(category_id=id)
-    return render(request, 'products.html', context={'products': products})
+    return render(request, 'products.html', context={'products': products, 'user_profile': user_profile})
 
 
 def cart(request):
-    return render(request, 'cart.html')
+    user_profile = request.user
+    return render(request, 'cart.html', context={'user_profile': user_profile})
 
 
 def edit_cart_product(id, way):

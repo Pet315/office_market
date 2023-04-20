@@ -1,18 +1,26 @@
-from django.shortcuts import render
-
+from django.shortcuts import render, redirect
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
 # from account.models import Account
 
 
-def sign_up(request):
-    return render(request, 'sign_up.html')
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+    else:
+        form = UserCreationForm()
+    return render(request, 'register.html', {'form': form})
 
 
-def log_in(request):
-    # if request.method == 'POST':
-    #     account = Account()
-    #     account.name = request.POST.get("email")
-    #     account.age = request.POST.get("password")
-    #     account.save()
-    return render(request, 'log_in.html')
-
-
+# @login_required
+# def profile(request):
+#     user_profile = request.user
+#     context = {'user_profile': user_profile}
+#     return render(request, 'profile.html', context)
+#
+# @login_required
+# def home(request):
+#     return redirect('profile')

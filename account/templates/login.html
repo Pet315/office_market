@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+
+{% block title %} Log in {% endblock %}
+
+{% block link_in_nav %}
+    <a href="/register" class="btn btn-outline-light me-2" type="button">Sign up</a>
+{% endblock %}
+
+{% block content %}
+    <h4 class="title">Log in</h4>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Log in</button>
+    </form>
+    <div style="height: 150px"></div>
+{% endblock %}

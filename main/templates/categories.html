@@ -1,124 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "layout.html" %}
 
-<head>
-    <title>Office Market. Categories</title>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block title %} Categories {% endblock %}
 
-    <!--    Bootstrap-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+{% block link_in_nav %}
+    <p style="color: white">{{ user_profile.username }}</p>
+    <a href="/" class="btn btn-outline-light me-2" type="button">Log out</a>
+{% endblock %}
 
-    <style>
-        .title {
-            color: #1C0878;
-            text-align: left;
-            padding: 0;
-            margin-bottom: 1em;
-        }
-    </style>
-</head>
-
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #1C0878">
-        <div class="container">
-            <a class="navbar-brand" href="/">Office market</a>
-
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/">Categories</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/cart">Cart</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contacts">Contacts</a>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <a href="/sign_up" class="btn btn-outline-light me-2" type="button">Sign up</a>
-            </div>
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <a href="/log_in" class="btn btn-outline-light me-2" type="button">Log in</a>
-            </div>
-        </div>
-    </nav>
-
-    <div class="container my-5">
-        <h4 class="title">Categories</h4>
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-5">
-        {% for category in categories %}
+{% block content %}
+    <h4 class="title">Categories</h4>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-5">
+    {% for category in categories %}
 {#        {% for i in '012345'|make_list %}#}
-            <div class="col">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ category.name }}</h5>
-                        <p class="card-text">
-                            <u>You can find there:</u> {{ category.examples }}
-                        </p>
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ category.name }}</h5>
+                    <p class="card-text">
+                        <u>You can find there:</u> {{ category.examples }}
+                    </p>
 {#                            <p class="card-text">#}
 {#                                <u>Quality:</u> {{ category.quality }}#}
 {#                            </p>#}
-                    </div>
-                    <div class="card-body">
-                        <a href="products/{{ category.id }}" class="btn btn-primary">Review</a>
-                    </div>
+                </div>
+                <div class="card-body">
+                    <a href="/products/{{ category.id }}" class="btn btn-primary">Review</a>
                 </div>
             </div>
-        {% endfor %}
         </div>
+    {% endfor %}
     </div>
-
-    <a name="contacts"></a>
-{#    fixed-bottom#}
-    <footer class="text-center text-lg-start">
-        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-            <div class="container p-4">
-                <div class="row">
-                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                        <h6 class="text-uppercase">Email</h6>
-                        <ul class="list-unstyled mb-0">
-                            <li>
-                                <a href="#" class="text-dark">info@office_market.com</a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                        <h6 class="text-uppercase">Phone number</h6>
-                        <ul class="list-unstyled mb-0">
-                            <li>
-                                <a href="#" class="text-dark">+91 89250 317834</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                        <h6 class="text-uppercase">Telegram</h6>
-                        <ul class="list-unstyled mb-0">
-                            <li>
-                                <a href="#" class="text-dark">@office_market_bot</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                        <h6 class="text-uppercase">Instagram</h6>
-
-                        <ul class="list-unstyled mb-0">
-                            <li>
-                                <a href="#" class="text-dark">@office_market</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <br>© 2022 Copyright:
-            <a class="text-dark" href="#">MDB</a>
-        </div>
-    </footer>
-</body>
-
-</html>
+{% endblock %}
