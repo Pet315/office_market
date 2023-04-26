@@ -13,7 +13,7 @@ import os, whitenoise, dj_database_url
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-from office_market import secret_key
+# from office_market import secret_key
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
