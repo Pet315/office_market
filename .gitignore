@@ -1,6 +1,5 @@
 /.idea
 /venv
-/office_market/secret_key.py
 /main/__pycache__
 /office_market/__pycache__
 
