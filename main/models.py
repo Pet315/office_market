@@ -42,6 +42,7 @@ class Order(models.Model):
     quantity = models.IntegerField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     email = models.TextField(max_length=470)
+    is_processed = models.BooleanField(default=False)
 
     def __str__(self):
         return f'{self.product}'
