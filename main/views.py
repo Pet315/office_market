@@ -11,7 +11,7 @@ def category(request):
 
 
 def product(request, id: int):
-    if id > len(Category.objects.all()):
+    if id > Category.objects.latest('id').id:
         return HttpResponseNotFound('Wrong number')
     user_profile = request.user
     products = Product.objects.filter(category_id=id)

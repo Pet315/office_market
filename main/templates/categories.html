@@ -14,22 +14,24 @@
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-5">
     {% for category in categories %}
 {#        {% for i in '012345'|make_list %}#}
-        <div class="col">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">{{ category.name }}</h5>
-                    <p class="card-text">
-                        <u>You can find there:</u> {{ category.examples }}
-                    </p>
-{#                            <p class="card-text">#}
-{#                                <u>Quality:</u> {{ category.quality }}#}
-{#                            </p>#}
-                </div>
-                <div class="card-body">
-                    <a href="/products/{{ category.id }}" class="btn btn-primary">Review</a>
+{#        {% if category.name != '' %}#}
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ category.name }}</h5>
+                        <p class="card-text">
+                            <u>You can find there:</u> {{ category.examples }}
+                        </p>
+    {#                            <p class="card-text">#}
+    {#                                <u>Quality:</u> {{ category.quality }}#}
+    {#                            </p>#}
+                    </div>
+                    <div class="card-body">
+                        <a href="/products/{{ category.id }}" class="btn btn-primary">Review</a>
+                    </div>
                 </div>
             </div>
-        </div>
+{#        {% endif %}#}
     {% endfor %}
     </div>
 {% endblock %}
