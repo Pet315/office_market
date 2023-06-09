@@ -15,7 +15,7 @@
     {% for category in categories %}
 {#        {% for i in '012345'|make_list %}#}
         <div class="col">
-            <div class="card">
+            <div class="card text-center">
                 <div class="card-body">
                     <h5 class="card-title">{{ category.name }}</h5>
                     <p class="card-text">
@@ -24,6 +24,10 @@
 {#                            <p class="card-text">#}
 {#                                <u>Quality:</u> {{ category.quality }}#}
 {#                            </p>#}
+                </div>
+                <div>
+                    {% load static %}
+                    <img src="{% static 'cat_img/' %}{{ category.id }}.jpg" alt="Image {{ category.id }}" style="width:200px; height: 150px">
                 </div>
                 <div class="card-body">
                     <a href="/products/{{ category.id }}" class="btn btn-primary">Review</a>

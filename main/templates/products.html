@@ -12,10 +12,10 @@
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-5">
     {% for product in products %}
         <div class="col">
-            <div class="card">
+            <div class="card text-center">
                 <div class="card-body">
-                    <h5 class="card-title">{{ product.name }}</h5>
-                    <p class="card-text">
+                    <h5 class="card-title" style="margin-top: 10px">{{ product.name }}</h5>
+                    <p class="card-text" style="margin-top: 30px">
                         <u>Price:</u> {{ product.price }}
                     </p>
                     <p class="card-text">
@@ -24,6 +24,10 @@
                     <p class="card-text">
                         <u>Category:</u> {{ product.category }}
                     </p>
+                </div>
+                <div>
+                    {% load static %}
+                    <img src="{% static 'prd_img/' %}{{ product.id }}.jpg" alt="Image {{ product.id }}" style="width:200px; height: 150px">
                 </div>
                 <div class="card-body">
                     <a href="/cart/{{ product.id }}" class="btn btn-danger">Add to cart</a>

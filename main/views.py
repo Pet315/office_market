@@ -1,6 +1,7 @@
 from django.http import HttpResponseNotFound
 from django.shortcuts import render
-from main.models import Product, Category, Cart, Order
+from main.models import *
+from SPARQLWrapper import SPARQLWrapper, JSON
 
 
 def category(request):
@@ -65,3 +66,41 @@ def send_order(request):
         order.save()
         ord.delete()
     return render(request, 'order.html')
+
+
+def about(request):
+    sparql = SPARQLWrapper("http://dbpedia.org/sparql")
+    query = """
+        PREFIX dbo: <http://dbpedia.org/ontology/>
+        PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+        
+        SELECT ?company ?label ?description ?foundingDate ?owner
+        WHERE {
+          ?company rdf:type dbo:Company ;
+                   rdfs:label ?label ;
+                   dbo:abstract ?description ;
+                   dbo:foundingDate ?foundingDate ;
+                   dbo:owner ?ownerResource .
+          
+          ?ownerResource foaf:name ?owner .
+          
+          FILTER (LANG(?label) = 'en' && LANG(?description) = 'en' && REGEX(STR(?label), "Staples", "i"))
+        }
+        LIMIT 1
+    """
+    sparql.setQuery(query)
+    sparql.setReturnFormat(JSON)
+    results = sparql.query().convert()
+    content = {}
+    for result in results["results"]["bindings"]:
+        content = result
+    print(content)
+    name = content['label']['value']
+    desc = content['description']['value']
+    founded = content['foundingDate']['value']
+    owner = content['owner']['value']
+    return render(request, 'about.html', context={"name": name, 'desc': desc, 'founded': founded, 'owner': owner})
+
+
+# {'company': {'type': 'uri', 'value': 'http://dbpedia.org/resource/Staples_Inc.'}, 'label': {'type': 'literal', 'xml:lang': 'en', 'value': 'Staples Inc.'}, 'description': {'type': 'literal', 'xml:lang': 'en', 'value': 'Staples Inc. is an American retail company headquartered in Framingham, Massachusetts, that offers products and services designed to support working and learning. The company opened its first store in Brighton, Massachusetts on May 1, 1986. By 1996, it had reached the Fortune 500, and it later acquired the office supplies company Quill Corporation. In 2014, in the wake of increasing competition from e-commerce market, Staples began to close some of its locations. In 2015, Staples announced its intent to acquire Office Depot and OfficeMax. However, the purchase was blocked under antitrust grounds due to the consolidation that would result. After the failed acquisition, Staples began to refocus its operations to downplay its brick-and-mortar outlets, and place more prominence on its B2B supply business. In 2017, after its sale to Sycamore Partners, the company was effectively split into three "independently managed and capitalized" entities sharing the Staples name, separating its U.S. retail operations, and Canadian retail operations, from the B2B business.'}, 'foundingDate': {'type': 'typed-literal', 'datatype': 'http://www.w3.org/2001/XMLSchema#date', 'value': '1986-05-01'}}
+

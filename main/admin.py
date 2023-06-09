@@ -1,8 +1,9 @@
 from django.contrib import admin
 from main.models import *
+from import_export.admin import ImportExportModelAdmin
 
 
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(ImportExportModelAdmin):
     list_display = ['name', 'examples']
     list_display_links = ['name', 'examples']
     list_filter = ['name']
@@ -10,7 +11,7 @@ class CategoryAdmin(admin.ModelAdmin):
     list_per_page = 10
 
 
-class ProductAdmin(admin.ModelAdmin):
+class ProductAdmin(ImportExportModelAdmin):
     list_display = ['name', 'price', 'desc', 'category']
     list_display_links = ['name', 'category']
     list_filter = ['name', 'price', 'category']
@@ -18,7 +19,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_per_page = 10
 
 
-class CartAdmin(admin.ModelAdmin):
+class CartAdmin(ImportExportModelAdmin):
     list_display = ['product', 'quantity', 'user']
     list_display_links = ['product', 'quantity', 'user']
     list_filter = ['product', 'user']
@@ -26,7 +27,7 @@ class CartAdmin(admin.ModelAdmin):
     list_per_page = 10
 
 
-class OrderAdmin(admin.ModelAdmin):
+class OrderAdmin(ImportExportModelAdmin):
     list_display = ['product', 'quantity', 'user', 'email', 'is_processed']
     list_display_links = ['product', 'quantity', 'user', 'is_processed']
     list_filter = ['product', 'user', 'is_processed']
