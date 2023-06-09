@@ -13,7 +13,6 @@
     <h4 class="title">Categories</h4>
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-5">
     {% for category in categories %}
-{#        {% for i in '012345'|make_list %}#}
         <div class="col">
             <div class="card text-center">
                 <div class="card-body">
@@ -21,9 +20,6 @@
                     <p class="card-text">
                         <u>You can find there:</u> {{ category.examples }}
                     </p>
-{#                            <p class="card-text">#}
-{#                                <u>Quality:</u> {{ category.quality }}#}
-{#                            </p>#}
                 </div>
                 <div>
                     {% load static %}
