@@ -5,3 +5,5 @@ Django project 'Office Market' consists of 5 pages:
 * ['Categories'](https://github.com/Pet315/office_market/blob/main/main/templates/categories.html)
 * ['Products'](https://github.com/Pet315/office_market/blob/main/main/templates/products.html)
 * ['Cart'](https://github.com/Pet315/office_market/blob/main/main/templates/cart.html)
+
+Also you can find [there](https://github.com/Pet315/office_market/blob/main/main/views.py) using SPARQL
